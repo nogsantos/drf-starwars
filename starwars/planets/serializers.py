@@ -9,7 +9,7 @@ class PlanetSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'name',
-            'weather',
-            'solo',
-            'swapi_apearece',
+            'climate',
+            'terrain',
+            'films',
         )
