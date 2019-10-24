@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.postgres',
     'django_filters',
     'rest_framework',
+    'drf_yasg',
     'starwars.planets',
 ]
 
