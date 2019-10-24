@@ -1,5 +1,7 @@
 # Starwars
 
+[![Build Status](https://travis-ci.org/nogsantos/drf-starwars.svg?branch=master)](https://travis-ci.org/nogsantos/drf-starwars)
+
 Desenvolver uma API que contenha os dados dos planetas.
 
 **Requisitos:**
