@@ -9,6 +9,6 @@ before_script:
   - chmod +x ./cc-test-reporter
   - ./cc-test-reporter before-build
 script:
-  - coverage run manage.py test -n
+  - coverage run manage.py test
 after_success:
   - coveralls
