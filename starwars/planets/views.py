@@ -1,27 +1,20 @@
-from rest_framework import (
-    viewsets,
-    response,
-    filters,
-    status
-)
-from rest_framework.decorators import action
+from rest_framework import viewsets
+from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
 
-from . import (
-    models,
-    serializers
-)
+from . import serializers
+from . import models
 
 
 class PlanetsViewSet(viewsets.ModelViewSet):
     """
     # Planets
 
-    - Adicionar um planeta (com nome, clima e terreno)
-    - Listar planetas
-    - Buscar por nome
-    - Buscar por ID
-    - Remover planeta
+    - Add a new planet by name, climate and terrain
+    - List planets
+    - Search by name
+    - Search by ID
+    - Remove a planet
     """
     queryset = models.Planet.objects.all()
     filter_backends = (filters.OrderingFilter, DjangoFilterBackend)
@@ -29,6 +22,6 @@ class PlanetsViewSet(viewsets.ModelViewSet):
     ordering = '-id'
 
     def get_queryset(self, *args, **kwargs):
-        name = self.request.query_params.get("name", None)
+        name = self.request.query_params.get('name', None)
 
         return models.Planet.objects.filter(name=name)
