@@ -1,12 +1,14 @@
-from rest_framework import viewsets
-from rest_framework import filters
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework import filters
+from rest_framework import response
+from rest_framework import status
+from rest_framework import viewsets
 
-from . import serializers
-from . import models
+from starwars.planets.models import Planet
+from starwars.planets.serializers import PlanetSerializer
 
 
-class PlanetsViewSet(viewsets.ModelViewSet):
+class PlanetView(viewsets.ModelViewSet):
     """
     # Planets
 
@@ -16,12 +18,26 @@ class PlanetsViewSet(viewsets.ModelViewSet):
     - Search by ID
     - Remove a planet
     """
-    queryset = models.Planet.objects.all()
+    queryset = Planet.objects.all()
     filter_backends = (filters.OrderingFilter, DjangoFilterBackend)
-    serializer_class = serializers.PlanetSerializer
-    ordering = '-id'
+    serializer_class = PlanetSerializer
 
     def get_queryset(self, *args, **kwargs):
         name = self.request.query_params.get('name', None)
+        pk = self.request.query_params.get('id', None)
 
-        return models.Planet.objects.filter(name=name)
+        if name:
+            self.queryset = self.queryset.filter(name__icontains=name)
+        if pk:
+            self.queryset = self.queryset.filter(pk=pk)
+
+        return self.queryset
+
+    def create(self, request, **kwargs):
+        serializer = self.get_serializer(
+            data=request.data,
+            context=self.get_serializer_context()
+        )
+        serializer.is_valid(raise_exception=True)
+
+        return response.Response(dict(resp='ok', ), status.HTTP_200_OK)
