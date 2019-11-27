@@ -4,15 +4,16 @@ from rest_framework import response
 from rest_framework import status
 from rest_framework import viewsets
 
+from starwars.planets.helpers import GetFilmByPlanet
 from starwars.planets.models import Planet
 from starwars.planets.serializers import PlanetSerializer
 
 
-class PlanetView(viewsets.ModelViewSet):
+class PlanetViewSet(viewsets.ModelViewSet):
     """
     # Planets
 
-    - Add a new planet by name, climate and terrain
+    - Add a new planet
     - List planets
     - Search by name
     - Search by ID
@@ -39,5 +40,9 @@ class PlanetView(viewsets.ModelViewSet):
             context=self.get_serializer_context()
         )
         serializer.is_valid(raise_exception=True)
+        instance = serializer.save()
 
-        return response.Response(dict(resp='ok', ), status.HTTP_200_OK)
+        res = GetFilmByPlanet(instance)
+        res.search()
+
+        return response.Response(serializer.data, status.HTTP_200_OK)

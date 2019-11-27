@@ -26,6 +26,7 @@ class PlanetSerializerTest(TestCase):
             'surface_water',
             'climate',
             'terrain',
+            'films_number_of_appearances',
             'films',
         ]
 

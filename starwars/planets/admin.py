@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from starwars.planets.models import Planet, Film
+
+admin.site.register(Planet)
+admin.site.register(Film)

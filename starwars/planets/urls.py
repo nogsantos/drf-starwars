@@ -1,15 +1,12 @@
 from django.conf.urls import url, include
+from django.urls import path
 from rest_framework import routers
 
-from starwars.planets.views import PlanetView
+from starwars.planets.views import PlanetViewSet
 
 router = routers.DefaultRouter()
-router.register(
-    '',
-    PlanetView,
-    base_name='starwars-planets'
-)
+router.register('', PlanetViewSet, base_name='planets')
 
 urlpatterns = [
-    url(r'^', include(router.urls)),
+    path('', include(router.get_urls())),
 ]
