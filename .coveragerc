@@ -1,0 +1,7 @@
+[run]
+source = starwars
+omit =
+    starwars/**/migrations/*.py
+    starwars/**/tests/*.py
+    starwars/wsgi.py
+    starwars/settings.py

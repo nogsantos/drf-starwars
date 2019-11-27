@@ -1,6 +1,6 @@
 # Starwars
 
-[![Build Status](https://travis-ci.org/nogsantos/drf-starwars.svg?branch=master)](https://travis-ci.org/nogsantos/drf-starwars)
+[![Build Status](https://travis-ci.org/nogsantos/drf-starwars.svg?branch=master)](https://travis-ci.org/nogsantos/drf-starwars) [![Coverage Status](https://coveralls.io/repos/github/nogsantos/drf-starwars/badge.svg)](https://coveralls.io/github/nogsantos/drf-starwars)
 
 Desenvolver uma API que contenha os dados dos planetas.
 
