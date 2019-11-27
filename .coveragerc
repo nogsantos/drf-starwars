@@ -5,3 +5,4 @@ omit =
     starwars/**/tests/*.py
     starwars/wsgi.py
     starwars/settings.py
+    starwars/planets/apps.py
