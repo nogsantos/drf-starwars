@@ -3,13 +3,13 @@ from json import JSONDecodeError
 
 import requests
 
-from starwars.planets.models import Film
+from starwars.planets.models import Film, Planet
 
 
 class GetFilmByPlanet:
     BASE_URL = 'https://swapi.co/api/planets/?search='
 
-    def __init__(self, planet):
+    def __init__(self, planet: Planet):
         self.planet = planet
 
     def search(self):
@@ -37,11 +37,11 @@ class GetFilmByPlanet:
             film = requests.get(film_address).json()
             created = Film.objects.create(
                 title=film['title'],
-                episode_id=(film['episode_id'] or None),
-                opening_crawl=(film['opening_crawl'] or None),
-                director=(film['director'] or None),
-                producer=(film['producer'] or None),
-                release_date=(film['release_date'] or None)
+                episode_id=film['episode_id'],
+                opening_crawl=film['opening_crawl'],
+                director=film['director'],
+                producer=film['producer'],
+                release_date=film['release_date']
             )
             self.planet.films.add(created)
             self.planet.save()
