@@ -1,6 +1,6 @@
 # Starwars
 
-[![Build Status](https://travis-ci.org/nogsantos/drf-starwars.svg?branch=master)](https://travis-ci.org/nogsantos/drf-starwars) [![Coverage Status](https://coveralls.io/repos/github/nogsantos/drf-starwars/badge.svg)](https://coveralls.io/github/nogsantos/drf-starwars)
+[![Build Status](https://travis-ci.org/nogsantos/drf-starwars.svg?branch=master)](https://travis-ci.org/nogsantos/drf-starwars)
 
 Desenvolver uma API que contenha os dados dos planetas.
 
@@ -35,4 +35,13 @@ Para cada planeta também devemos ter a quantidade de aparições em filmes, que
 ```console
 pip install -r requirements-dev.txt
 cp contrib/env.sample .env
+```
+
+**Coverage**
+
+Visualizar relatório de cobertura de testes
+
+```console
+coverage run --source='starwars' manage.py test --noinput --failfast --parallel
+coverage report
 ```
