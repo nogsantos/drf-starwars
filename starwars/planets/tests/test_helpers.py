@@ -44,6 +44,7 @@ class HelperGetFilmByPlanetTest(TestCase):
 
         self.helper.search()
 
+        self.assertNumQueries(0, lambda: self.helper.search())
         persist.assert_called()
 
     @patch.object(GetFilmByPlanet, 'persist')
@@ -66,4 +67,5 @@ class HelperGetFilmByPlanetTest(TestCase):
 
         self.helper.search()
 
+        self.assertNumQueries(0, lambda: self.helper.search())
         persist.assert_not_called()

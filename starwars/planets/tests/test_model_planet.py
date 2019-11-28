@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from django.test import TestCase
+from model_bakery import baker
 
 from starwars.planets.models import Planet
 
@@ -8,15 +9,12 @@ from starwars.planets.models import Planet
 class PlanetModelTest(TestCase):
 
     def setUp(self):
-        self.planet = Planet.objects.create(
-            name='Tatooine',
-            terrain='Dessert',
-            climate='Arid',
-        )
+        self.planet = baker.make(Planet, name='Tatooine')
 
     def test_create(self):
         """Should create a new planet"""
         self.assertTrue(Planet.objects.exists())
+        self.assertEqual(Planet.objects.count(), 1)
 
     def test_has_films(self):
         """Should planet has films"""

@@ -1,6 +1,7 @@
 from unittest.mock import patch
 
 from django.test import TestCase
+from model_bakery import baker
 from rest_framework import status
 from rest_framework.reverse import reverse
 
@@ -11,12 +12,7 @@ from starwars.planets.models import Planet
 class PlanetViewTest(TestCase):
 
     def setUp(self):
-        self.planet = Planet.objects.create(
-            name='Tatooine',
-            terrain='Dessert',
-            climate='Arid',
-        )
-
+        self.planet = baker.make(Planet, name='Tatooine')
         self.base_name = 'planets'
 
     def test_list(self):
@@ -42,19 +38,21 @@ class PlanetViewTest(TestCase):
 
         search.assert_called_once()
         self.assertEquals(status.HTTP_200_OK, response.status_code)
+        self.assertEqual(Planet.objects.count(), 2)
 
     def test_remove(self):
         """Should remove an planet"""
-        planet_to_remove = Planet.objects.create(
-            name='Yavin IV',
-            terrain='jungle, rainforests',
-            climate='temperate, tropical',
-        )
+        planet_to_remove = baker.make(Planet)
+
+        self.assertEqual(Planet.objects.count(), 2)
+
         response = self.client.delete(
             reverse(f'{self.base_name}-detail',
                     kwargs={'pk': planet_to_remove.pk})
         )
+
         self.assertEquals(status.HTTP_204_NO_CONTENT, response.status_code)
+        self.assertEqual(Planet.objects.count(), 1)
 
     def test_filter_by_name(self):
         """Should filter planet by name"""

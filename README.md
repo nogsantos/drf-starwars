@@ -26,3 +26,13 @@ Para cada planeta também devemos ter a quantidade de aparições em filmes, que
 - Buscar por nome
 - Buscar por ID
 - Remover planeta
+
+
+## Setup
+
+**Desenvolvimento**
+
+```console
+pip install -r requirements-dev.txt
+cp contrib/env.sample .env
+```

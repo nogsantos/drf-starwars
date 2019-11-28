@@ -1,6 +1,7 @@
 from uuid import UUID
 
 from django.test import TestCase
+from model_bakery import baker
 
 from starwars.planets.models import Film
 
@@ -8,13 +9,12 @@ from starwars.planets.models import Film
 class FilmModelTest(TestCase):
 
     def setUp(self):
-        self.film = Film.objects.create(
-            title='A New Hope'
-        )
+        self.film = baker.make(Film, title='A New Hope')
 
     def test_create(self):
         """Should create a new planet"""
         self.assertTrue(Film.objects.exists())
+        self.assertEqual(Film.objects.count(), 1)
 
     def test_str(self):
         """Should return film title as string"""
